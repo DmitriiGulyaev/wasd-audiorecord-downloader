@@ -1,13 +1,16 @@
 # wasd-audiorecord-downloader
-to use the script you need to install:
+demonstration: https://youtu.be/LAC24_K77PA
 
-ffmpeg https://ffmpeg.org/download.html
+To use the script you need to install:
 
-streamlink https://github.com/streamlink/streamlink
+ffmpeg: https://ffmpeg.org/download.html
+
+streamlink: https://github.com/streamlink/streamlink
 
 python -m pip install -r requirements.txt
 
-for start in CLI use:
+
+For start in CLI use:
 python wasd-audiorecord-downloader.py
 
 
