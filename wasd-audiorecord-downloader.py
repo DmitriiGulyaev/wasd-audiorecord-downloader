@@ -11,7 +11,7 @@ alphabet = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', '�
             'я': 'ya'}
 folder_name = 'WASD'
 path = folder_name + '\\'
-
+delete = True
 p = 'preform'
 
 
@@ -72,16 +72,18 @@ if keyboard.read_key() == "enter":
     system(f'streamlink -o "{p}.aac" "{audio}" best --stream-segment-threads 10')
     system(f'ffmpeg -i {p}.aac {p}.mp3')
 
-    system(f'ffmpeg -i "{p}.mp3" -i "{cover}" -map 0:0 -map 1:0 -c copy -id3v2_version 3 -metadata:s:v '
-           f'title="Album cover" -metadata:s:v comment="Cover (Front)" {path}{uncut}')
     if not os.path.isdir(folder_name):
         os.mkdir(folder_name)
+
+    system(f'ffmpeg -i "{p}.mp3" -i "{cover}" -map 0:0 -map 1:0 -c copy -id3v2_version 3 -metadata:s:v '
+           f'title="Album cover" -metadata:s:v comment="Cover (Front)" "{path}{uncut}"')
+
     system(f'{path}{uncut}')
 
-    system(f'del {p}.aac')
-    system(f'del {p}.mp3')
     with open(f'{path}cutter.bat', 'w') as f:
         f.write(cutter)
         f.close()
 
-
+    if os.path.exists(f'{path}{uncut}') and delete:
+        system(f'del {p}.aac')
+        system(f'del {p}.mp3')
