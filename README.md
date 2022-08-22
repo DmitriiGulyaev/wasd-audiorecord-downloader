@@ -7,3 +7,6 @@ python -m pip install -r requirements.txt
 
 for start in CLI use:
 python wasd-audiorecord-downloader.py
+
+
+To cut audio, change the start and end values in the cutter.bat file and start it
