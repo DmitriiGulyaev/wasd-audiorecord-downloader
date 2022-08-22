@@ -11,6 +11,7 @@ alphabet = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', '�
             'я': 'ya'}
 folder_name = 'WASD'
 path = folder_name + '\\'
+
 p = 'preform'
 
 
@@ -68,15 +69,19 @@ cutter = '''@echo off\nset start=**:**\nset end=**:**\n''' \
 
 print('Нажми Enter, если верно')
 if keyboard.read_key() == "enter":
-    system(f'streamlink -o "{p}.aac" "{audio}" best --stream-segment-threads 10') # streamlink -o "{p}.aac" "https://cdn.wasd.tv/live/381873/tracks-a1/index-1661101179-8168.m3u8" best --stream-segment-threads 10
-    system(f'ffmpeg -i {p}.aac {p}.mp3') # ffmpeg -i {p}.aac {p}.mp3
-    system(f'del {p}.aac') # del {p}.aac
+    system(f'streamlink -o "{p}.aac" "{audio}" best --stream-segment-threads 10')
+    system(f'ffmpeg -i {p}.aac {p}.mp3')
+
     system(f'ffmpeg -i "{p}.mp3" -i "{cover}" -map 0:0 -map 1:0 -c copy -id3v2_version 3 -metadata:s:v '
-           f'title="Album cover" -metadata:s:v comment="Cover (Front)" {path}{uncut}') # ffmpeg -i "{p}.mp3" -i "https://st.wasd.tv/upload/avatars/01b9c117-da50-48d4-b75b-e24c6f5e62c0/original.jpeg" -map 0:0 -map 1:0 -c copy -id3v2_version 3 -metadata:s:v  title="Album cover" -metadata:s:v comment="Cover (Front)" WASD\{uncut}.mp3
+           f'title="Album cover" -metadata:s:v comment="Cover (Front)" {path}{uncut}')
     if not os.path.isdir(folder_name):
         os.mkdir(folder_name)
-    system(f'{path}{uncut}') # WASD\{uncut}.mp3
+    system(f'{path}{uncut}')
+
+    system(f'del {p}.aac')
     system(f'del {p}.mp3')
     with open(f'{path}cutter.bat', 'w') as f:
         f.write(cutter)
         f.close()
+
+
