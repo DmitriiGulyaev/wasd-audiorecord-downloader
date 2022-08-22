@@ -1,6 +1,8 @@
 # wasd-audiorecord-downloader
 to use the script you need to install:
+
 ffmpeg https://ffmpeg.org/download.html
+
 streamlink https://github.com/streamlink/streamlink
 
 python -m pip install -r requirements.txt
